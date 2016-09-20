@@ -4,34 +4,50 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceView;
+import android.view.View;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 
 public class MainActivity extends ActionBarActivity {
+
+    SurfaceView drawingSurface;
+    int tapsSoFar;
+    Canvas canvasToDraw;
+    Paint drawPaint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        canvasToDraw = new Canvas();
+        drawingSurface = new SurfaceView(getApplicationContext());
+        drawPaint = new Paint();
+        tapsSoFar = 0;
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        drawingSurface.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (tapsSoFar) {
+                    case 0:
+                        canvasToDraw.drawCircle(40, 4, 4, drawPaint);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        tapsSoFar = 0;
+                        break;
+                }
 
-        return super.onOptionsItemSelected(item);
-    }
+            } // onClick
+        }); // drawingSurface.setOnClickListener
+    } // onCreate
+
+
+
+
 }
