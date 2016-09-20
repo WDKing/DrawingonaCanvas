@@ -8,6 +8,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Color;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -22,8 +23,9 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         canvasToDraw = new Canvas();
-        drawingSurface = new SurfaceView(getApplicationContext());
+        drawingSurface = (SurfaceView) findViewById(R.id.surface);
         drawPaint = new Paint();
+        drawPaint.setColor(Color.rgb(150,150,100));
         tapsSoFar = 0;
 
 
@@ -33,13 +35,20 @@ public class MainActivity extends ActionBarActivity {
                 switch (tapsSoFar) {
                     case 0:
                         canvasToDraw.drawCircle(40, 4, 4, drawPaint);
+                        drawingSurface.draw(canvasToDraw);
+                        tapsSoFar++;
                         break;
                     case 1:
+                        canvasToDraw.drawRect(0,50,0,50,drawPaint);
+                        drawingSurface.draw(canvasToDraw);
+                        tapsSoFar++;
                         break;
                     case 2:
+                        tapsSoFar++;
                         break;
                     case 3:
                         tapsSoFar = 0;
+
                         break;
                 }
 
